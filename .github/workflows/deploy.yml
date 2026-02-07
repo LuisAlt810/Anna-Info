@@ -1,0 +1,38 @@
+name: 🚀 Deploy to 8-BitBowser7432 🌍
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: 📦 Build & Deploy (No NPM 😎)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: 🧪 List Files (Debug 👀)
+        run: ls -la
+
+      - name: ⚙️ Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: 📤 Upload Site Files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
